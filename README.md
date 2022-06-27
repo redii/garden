@@ -1,4 +1,4 @@
-![Logo](assets/logo.png)
+<img src="assets/logo.png" alt="Logo" width="300" />
 
 # 🪴 My Garden
 
@@ -25,6 +25,7 @@ The raspberry pi itself is capable of doing a timelapse using the `raspistill` c
 The script can be found [here](scripts/timelapse.js).
 
 ## 🛠 Installation
+...
 
 ## 🌐 Website
 I wanted to provide a website where I can take a look at my plants whenever I want. But I also wanted the hole project to be selfcontained and dont have any dependencies for external services such as databases or image hosting. So in order to run that website I used sqlite and a local webserver on the pi, which is accessible via an external port forwarding from the internet.
