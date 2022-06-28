@@ -1,0 +1,16 @@
+{
+  "name": "garden-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^7.5.3",
+    "onoff": "^6.0.3",
+    "pi-camera": "^1.7.0"
+  }
+}
