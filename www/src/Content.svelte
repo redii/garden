@@ -5,6 +5,7 @@
     export let images = [],
         pageSize = 10
 
+    $: loading = true
     $: pageNumber = 1
     $: tableData = images.slice(
         (pageNumber - 1) * pageSize,
@@ -19,7 +20,8 @@
                 },
             })
             .json()
-        images = response.data.images
+        images = response.data.images.reverse()
+        // loading = false
     })
 </script>
 
@@ -48,7 +50,11 @@
     </div>
 </div>
 <hr class="mt-5 mb-5" />
-{#if !images.length}
+{#if loading}
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border mt-5" role="status" />
+    </div>
+{:else if !images.length}
     <div class="row">
         <div class="col">
             <h2>No image taken yet... 👀</h2>
@@ -56,7 +62,7 @@
     </div>
 {:else}
     <div class="row">
-        <div class="col-lg-6 mb-5">
+        <div class="col-md-12 col-lg-8 mb-5">
             <h2>📸 Latest Image</h2>
             <p>
                 {new Date(images[0].datetime * 1000).toLocaleDateString(
@@ -72,7 +78,16 @@
             </p>
             <img src={images[0].link} alt="Latest" class="latest-image" />
         </div>
-        <div class="col-lg-6">
+        <div class="col-md-12 col-lg-4">
+            <p class="text-center">
+                <b>{images.length}</b> images taken since {new Date(
+                    images[images.length - 1].datetime * 1000
+                ).toLocaleDateString("de-DE", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                })}
+            </p>
             <table class="table">
                 <thead>
                     <tr>
@@ -109,7 +124,7 @@
                     {/each}
                 </tbody>
             </table>
-            <nav>
+            <nav style="float:left">
                 <ul class="pagination">
                     <li class="page-item">
                         <button
@@ -143,6 +158,9 @@
                     </li>
                 </ul>
             </nav>
+            <div style="float: right; line-height: 38px">
+                {Math.ceil(images.length / pageSize)} pages
+            </div>
         </div>
     </div>
 {/if}
@@ -173,6 +191,7 @@
         border: 1px solid #dee2e6;
         border-left: none;
         border-right: none;
+        border-radius: none;
         padding: 6px 12px;
         width: 64px;
         text-align: center;

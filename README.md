@@ -49,8 +49,8 @@ The setup is divided into several hardware and software specific steps...
     - `https://api.imgur.com/oauth2/authorize?client_id=XXX&client_secret=XXX&response_type=token`
 3. After getting redirected, extract your `access_token` and `refresh_token` from the browser url
 4. Create a new album, open it and extract its ID from the browser url
-    - also set it **publicly visible** on the album page
-5. Create a .env file (`cp .env.template .env`) and put your informations in it
+    - **do not** set it publicly visible
+5. Create a .env file in the root directory using `cp .env.template .env` and add your informations
 
 ### Wiring the Waterpump
 
@@ -69,6 +69,10 @@ By de-/activating the `GPIO 17` pin on the Raspberry Pi you are now able to swit
 
 ## 🌐 Website
 
-I wanted to provide a website where I can take a look at my plants whenever I want. First I wanted the project to be selfcontained and not depend on external services, but that would have meant to run the website on the Raspberry Pi in my local network, do a port forwarding and dynamically update my external IP via dyndns... so to make it a bit easier I used the [imgur API](https://apidocs.imgur.com/) to upload, and host all the images. Like this I am able to run the website publicly on the internet via Github Pages and access the timelapse images using the imgur API.
+I wanted to provide a website where I can take a look at my plants whenever I want.
 
-The website is build using svelte and can be found [here](https://redii.github.io/garden).
+First I wanted the project to be selfcontained and not depend on external services, but that would have meant to run the website on the Raspberry Pi in my local network, do a port forwarding and dynamically update my external IP via dyndns... so to make it a bit easier I used the [imgur API](https://apidocs.imgur.com/) to upload, and host all the images. With this setup I am able to run the website publicly on the internet via Github Pages and access the timelapse images using the imgur API.
+
+The website also uses the enviroment variables defined in the [.env file](.env.template) to access the images hosted on imgur. You can run the `npm run dev` command inside the `www folder` for an development server, which can be accessed via `localhost:8080`. More informations on how to use or run the website can be found [here](www/).
+
+The website and the current state of my garden can be found [here](https://redii.github.io/garden).
