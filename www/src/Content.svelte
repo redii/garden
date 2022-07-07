@@ -21,7 +21,7 @@
             })
             .json()
         images = response.data.images.reverse()
-        // loading = false
+        loading = false
     })
 </script>
 
