@@ -1,4 +1,7 @@
 <script>
+    import { onMount } from "svelte"
+    import ky from "ky"
+
     export let images = [],
         pageSize = 10
 
@@ -7,6 +10,17 @@
         (pageNumber - 1) * pageSize,
         pageNumber * pageSize
     )
+
+    onMount(async () => {
+        const response = await ky
+            .get(`https://api.imgur.com/3/album/${IMGUR_ALBUM}`, {
+                headers: {
+                    Authorization: `Client-ID ${IMGUR_CLIENT_ID}`,
+                },
+            })
+            .json()
+        images = response.data.images
+    })
 </script>
 
 <div class="row">
@@ -45,25 +59,24 @@
         <div class="col-lg-6 mb-5">
             <h2>📸 Latest Image</h2>
             <p>
-                {new Date(images[0].timestamp).toLocaleDateString("de-DE", {
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                })}
+                {new Date(images[0].datetime * 1000).toLocaleDateString(
+                    "de-DE",
+                    {
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                    }
+                )}
             </p>
-            <img
-                src={`/timelapse/image_${images[0].id}.jpg`}
-                alt="Latest"
-                class="latest-image"
-            />
+            <img src={images[0].link} alt="Latest" class="latest-image" />
         </div>
         <div class="col-lg-6">
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Timestamp</th>
                         <th scope="col">Image</th>
                     </tr>
@@ -73,21 +86,20 @@
                         <tr>
                             <th scope="row">{image.id}</th>
                             <td>
-                                {new Date(image.timestamp).toLocaleDateString(
-                                    "de-DE",
-                                    {
-                                        year: "numeric",
-                                        month: "2-digit",
-                                        day: "2-digit",
-                                        hour: "2-digit",
-                                        minute: "2-digit",
-                                    }
-                                )}
+                                {new Date(
+                                    image.datetime * 1000
+                                ).toLocaleDateString("de-DE", {
+                                    year: "numeric",
+                                    month: "2-digit",
+                                    day: "2-digit",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                })}
                             </td>
                             <td>
                                 <a
-                                    href={`/timelapse/image_${image.id}.jpg`}
-                                    alt={image.timestamp}
+                                    href={image.link}
+                                    alt={image.title}
                                     target="_blank"
                                 >
                                     ➡️
