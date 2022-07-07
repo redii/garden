@@ -18,14 +18,14 @@
         />
     </div>
     <div class="col-md-9">
-        <h1>🌱 My Garden</h1>
+        <h1>My Garden</h1>
         <p>
             Saw <a href="https://redd.it/vkuhvk">this</a>
             post on reddit and wanted to do it myself.
         </p>
         <p>
             But since my garding skills and reliability when it comes to plants
-            are about 0, I had to automate that process.
+            are about <b>zero</b>, I wanted to automate that process.
         </p>
         <p>
             Read more about my garden project on

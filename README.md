@@ -2,7 +2,7 @@
 
 # 🪴 My Garden
 
-Saw [this](https://www.reddit.com/r/interestingasfuck/comments/vkuhvk/time_lapse_of_a_pepper/) post on reddit and wanted to do it myself. But since my garding skills and reliability when it comes to plants are about 0, I wanted to automate that process.
+Saw [this](https://www.reddit.com/r/interestingasfuck/comments/vkuhvk/time_lapse_of_a_pepper/) post on reddit and wanted to do it myself. But since my garding skills and reliability when it comes to plants are about **zero**, I wanted to automate that process.
 
 ## Requirements
 
