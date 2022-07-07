@@ -1,2 +1,8 @@
-garden.sqlite
+.env
 node_modules
+garden.sqlite
+scripts/latest.jpg
+timelapse/*
+!timelapse/.gitkeep
+www/static/timelapse/*
+!www/static/timelapse/.gitkeep
