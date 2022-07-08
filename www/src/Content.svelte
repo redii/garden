@@ -20,7 +20,10 @@
                 },
             })
             .json()
-        images = response.data.images.reverse()
+        images = response.data.images
+        images.sort((a, b) => {
+            return b.datetime - a.datetime
+        })
         loading = false
     })
 </script>
