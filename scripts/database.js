@@ -1,3 +1,5 @@
+// when using sqlite instead of imgur
+
 const sqlite = require("better-sqlite3")
 const db = new sqlite("../garden.sqlite")
 

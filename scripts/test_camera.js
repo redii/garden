@@ -12,25 +12,29 @@ const cam = new PiCamera({
     nopreview: true,
 })
 
-const date = new Date()
-const timestamp = date.toLocaleString("de-DE").replace(", ", "_")
+async function main() {
+    const date = new Date()
+    const timestamp = date.toLocaleString("de-DE").replace(", ", "_")
 
-const form = new FormData()
-form.append("title", timestamp)
-form.append("description", `${timestamp.replace("_", " ")}`)
-form.append("album", process.env.IMGUR_ALBUM)
-form.append("image", fs.createReadStream("latest.jpg"))
+    const form = new FormData()
+    form.append("title", timestamp)
+    form.append("description", `${timestamp.replace("_", " ")}`)
+    form.append("album", process.env.IMGUR_ALBUM)
+    form.append("image", fs.createReadStream("latest.jpg"))
 
-const response = await fetch("https://api.imgur.com/3/image", {
-    method: "POST",
-    headers: {
-        Authorization: `Bearer ${process.env.IMGUR_ACCESS_TOKEN}`,
-    },
-    body: form,
-})
+    const response = await fetch("https://api.imgur.com/3/image", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${process.env.IMGUR_ACCESS_TOKEN}`,
+        },
+        body: form,
+    })
 
-console.log("Image taken", response)
+    console.log("Image taken", response)
 
-fs.unlink("latest.jpg", (err) => {
-    if (err) console.log(err)
-})
+    fs.unlink("latest.jpg", (err) => {
+        if (err) console.log(err)
+    })
+}
+
+main()
