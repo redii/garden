@@ -81,7 +81,7 @@ function refreshToken() {
 const cronjob = new CronJob(
     "0 0,30 * * * *",
     async () => {
-        cam.snap().then(() => {
+        cam.snap().then(async () => {
             const date = new Date()
             const timestamp = date.toLocaleString("de-DE").replace(", ", "_")
 
